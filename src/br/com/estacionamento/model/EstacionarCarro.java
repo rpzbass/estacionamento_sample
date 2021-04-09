@@ -1,20 +1,27 @@
 package br.com.estacionamento.model;
 
-public class EstacionarCarro {
+import java.util.Date;
 
+public class EstacionarCarro {
+	
+	
 	private Integer id;
-	private String entrada;
-	private String saida;
+	private Date entrada;
+	private Date saida;
 	private Integer vagaNumero;
 	private StatusVaga statusVaga ;
 	private Double valorPagar;
-	
+	private static int ncarrosEstacionados;
 
 	public EstacionarCarro() {
-
+		EstacionarCarro.ncarrosEstacionados = EstacionarCarro.ncarrosEstacionados + 1;
+		this.statusVaga = StatusVaga.DISPONIVEL;
+		this.valorPagar = 0.0;
+	
+		
 	}
 
-	public EstacionarCarro(Integer id, String entrada, String saida, Integer numero) {
+	public EstacionarCarro(Integer id, Date entrada, Date saida, Integer numero) {
 
 		this.id = id;
 		this.entrada = entrada;
@@ -22,6 +29,30 @@ public class EstacionarCarro {
 		this.vagaNumero = numero;
 		
 		
+	}
+
+	public StatusVaga getStatusVaga() {
+		return statusVaga;
+	}
+
+	public void setStatusVaga(StatusVaga statusVaga) {
+		this.statusVaga = statusVaga;
+	}
+
+	public Double getValorPagar() {
+		return valorPagar;
+	}
+
+	public void setValorPagar(Double valorPagar) {
+		this.valorPagar = valorPagar;
+	}
+
+	public static int getNcarrosEstacionados() {
+		return ncarrosEstacionados;
+	}
+
+	public static void setNcarrosEstacionados(int ncarrosEstacionados) {
+		EstacionarCarro.ncarrosEstacionados = ncarrosEstacionados;
 	}
 
 	public EstacionarCarro(EstacionarCarro objectEstacionar) {
@@ -63,25 +94,25 @@ public class EstacionarCarro {
 
 	}
 
-	public String getEntrada() {
+	public Date getEntrada() {
 
 		return entrada;
 
 	}
 
-	public void setEntrada(String entrada) {
+	public void setEntrada(Date entrada) {
 
 		this.entrada = entrada;
 
 	}
 
-	public String getSaida() {
+	public Date getSaida() {
 
 		return saida;
 
 	}
 
-	public void setSaida(String saida) {
+	public void setSaida(Date saida) {
 
 		this.saida = saida;
 
@@ -99,12 +130,45 @@ public class EstacionarCarro {
 
 	}
 	
+	public void retirarVeiculo() {
+		
+		if(this.statusVaga.equals(StatusVaga.OCUPADA)) {
+		
+				this.statusVaga = StatusVaga.DISPONIVEL;
+				this.setSaida(new Date());
+				this.valorTotalPorTempo(this.calcTempo(this.getEntrada(), this.getSaida()));
+				EstacionarCarro.ncarrosEstacionados -= EstacionarCarro.ncarrosEstacionados;
+				
+		
+		}else {
+				
+				System.out.print("A vaga está livre !!!");
+			
+			}	
+		}
+	
 	public void estacionarVeiculo() {
 		
-		this.statusVaga = StatusVaga.OCUPADA;
+		if(this.statusVaga.equals(StatusVaga.DISPONIVEL)) {
+			
+			this.statusVaga = StatusVaga.OCUPADA;
+			this.setEntrada(new Date());
+			
+		
+		}else {
+			
+			System.out.print("Vaga está ocupada");
+			
+		}	
 	}
+		
+	public long calcTempo(Date inicio, Date fim) {
+		
+		return fim.getTime()+3 - inicio.getTime(); 
+	}
+	
 
-	public void valorTotalPorTempo(Double tempo) {
+	public void valorTotalPorTempo(long tempo) {
 		
 		if(tempo < 1) {
 		
@@ -130,7 +194,11 @@ public class EstacionarCarro {
 	public String toString() {
 		return "EstacionarCarro  [\nid=" + id + ",\n entrada=" + entrada + ", \nsaida=" +   saida + ",\n vagaNumero=" + vagaNumero
 				+ ",\n statusVaga="
-				+ "" + statusVaga + ", carro=" + carro + "]";
-	}
+				+ "" + statusVaga + ", carro=" + carro
+				+ "Valor a Pagar=" +  valorPagar + "]";
+				
+	}	
+
+	
 
 }

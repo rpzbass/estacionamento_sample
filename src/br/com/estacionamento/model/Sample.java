@@ -1,10 +1,8 @@
 package br.com.estacionamento.model;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
 public class Sample {
 
+	
 	public static void main(String[] args) {
 		
 		
@@ -15,19 +13,22 @@ public class Sample {
 		EstacionarCarro estacionarCarro = new EstacionarCarro();
 		
 		estacionarCarro.setId(1);
-		estacionarCarro.setEntrada("15:00");
 		estacionarCarro.setVagaNumero(30);
 		estacionarCarro.estacionarVeiculo();
-		estacionarCarro.setCarro(new Carro(1,"Narea","ABC-1234"));
-	
+		estacionarCarro.setCarro(new Carro(1,"Marea","ABC-1234"));
+		
+		
+		estacionarCarro.retirarVeiculo();
+		
 		EstacionarCarro estacionarCarro2 = new EstacionarCarro();
 		
 		estacionarCarro2.setId(2);
-		estacionarCarro2.setEntrada("15:00");
+		
+		
 		estacionarCarro2.setVagaNumero(15);
 		estacionarCarro2.estacionarVeiculo();
 		estacionarCarro2.setCarro(new Carro(2,"Gol","XYY-4321"));
-
+		estacionarCarro2.retirarVeiculo();
 		
 		
 			
@@ -37,16 +38,19 @@ public class Sample {
 		
 		System.out.print(estacionamento.toString());
 		
-			
+		System.out.print("Total Carros Estacionados : " + EstacionarCarro.getNcarrosEstacionados());
 		
-	    Date inicio = new Date();
+		
+		
+		
+		/* Date inicio = new Date();
 	    
-	    Date fim = new Date();
+	       Date fim = new Date();
 	    
 	    
-	    System.out.print(inicio.getHours()-15);
+	       System.out.print(inicio.getHours()-15);
 	    		
-		
+		*/
 		
 		
 		

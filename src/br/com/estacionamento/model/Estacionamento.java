@@ -6,7 +6,7 @@ import java.util.Set;
 public class Estacionamento {
 
 	private Integer id;
-
+	
 	private String nome;
 	private String fone;
 	private String email;
@@ -17,7 +17,7 @@ public class Estacionamento {
 	Set<EstacionarCarro> estacionarcarros = new HashSet<>();  //Apartir do java 7 não há necessidade de repetir o tipagem<> operador diamente
 	
 	public Estacionamento() {
-		
+			
 	}
 	
 	public Set<EstacionarCarro> getEstacionarCarros() {
