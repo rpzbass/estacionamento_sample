@@ -13,11 +13,15 @@ public class EstacionarCarro {
 	private Double valorPagar;
 	private static int ncarrosEstacionados;
 
-	public EstacionarCarro() {
+	
+	{     //Bloco de inicialização
 		EstacionarCarro.ncarrosEstacionados = EstacionarCarro.ncarrosEstacionados + 1;
 		this.statusVaga = StatusVaga.DISPONIVEL;
 		this.valorPagar = 0.0;
 	
+	}
+	public EstacionarCarro() {
+		
 		
 	}
 
